@@ -1,0 +1,13 @@
+(menhir
+  (infer false)
+  (modules Parser)
+  (flags --explain --table --cmly))
+
+(ocamllex Lexer)
+
+(library
+  (name css_lib)
+  (libraries yojson ppx_deriving_yojson.runtime menhirLib)
+  (preprocess (pps ppx_deriving.show ppx_deriving_yojson))
+  (flags (-w -39 -w -3))
+)
