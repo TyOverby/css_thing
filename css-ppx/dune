@@ -1,0 +1,10 @@
+(library
+  (name ppx_css)
+  (kind ppx_rewriter)
+  (ppx_runtime_libraries css_stuff)
+  (libraries 
+    css_stuff 
+    core_kernel
+    ppxlib 
+  )
+  (preprocess (pps ppxlib.metaquot)))
