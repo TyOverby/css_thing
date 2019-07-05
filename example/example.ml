@@ -1,4 +1,18 @@
-module Css = [%css ".x {5} "];;
+module Css : sig 
+    val css_string: string
+    val x_cl: string
+    val y_id: string
+end = [%css {| 
+    .x {
+        background-color: red;
+        color: black;
+    } 
 
-print_endline Css.x;;
-print_int Css.y;;
+    #y .x {
+
+    }
+|}];;
+
+print_endline Css.css_string;;
+print_endline Css.x_cl;;
+print_endline Css.y_id;;

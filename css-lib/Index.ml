@@ -66,14 +66,15 @@ let insertComment (stylesheet : Types.stylesheet) (comment : Types.comment) =
 let parse ?(fp = "") (source : string) =
   let lexbuf = Lexing.from_string source in
   let pos_fname =
-    match getLast (String.split_on_char '/' fp) with None -> "" | Some s -> s
+    match getLast (String.split_on_char '/' fp) with 
+    | None -> "" 
+    | Some s -> s
   in
   lexbuf.lex_curr_p <- {lexbuf.lex_curr_p with pos_fname} ;
   try
     let stylesheet = Parser.stylesheet Lexer.css lexbuf in
     let comments = Lexer.comments () in
     let _ = Lexer.clearComments () in
-    (* List.iter (fun (c,pos) -> print_endline (c ^ (show_position pos))) comments; *)
     List.fold_left insertComment stylesheet comments
   with exn ->
     let _ = Lexer.clearComments () in

@@ -38,7 +38,7 @@ at_rule:
  };
 
 style_rule:
-  | s=selectors LBRACE S* r=declaration_w* e=RBRACE { 
+  | s=selectors LBRACE S* r=declaration_w* e=RBRACE S* { 
     StyleRule({
       prelude=s; 
       declarations=r; 
@@ -103,24 +103,5 @@ component_value:
   | STRING { match $1 with (c, s) -> String(c,s) }
   | URI { Uri $1 }
   | block { $1 }
- (* | UnicodeRange of string *)
+   (* | UnicodeRange of string *)
   ;
-
-(*selectors: 
-  | s=selector S* { [ s ] }
-  | s=selector S* COMMA S* ss=selectors { s :: ss }
-  ; 
-
-(* simple_selector [ combinator selector | S+ [ combinator? selector ]? ]? *)
-selector: 
-  | simple_selector { $1 }
-  | s1=selector S s2=simple_selector { s1 ^ " " ^ s2 }
-  | s1=selector s2=simple_selector { s1 ^ s2 }
-  | s=simple_selector LSQUARE S* ident=IDENT EQUALS str=STRING S* RSQUARE { s ^ "[" ^ ident ^ "=" ^ "'" ^ str ^ "'" ^ "]" }
-  ;
-
-simple_selector:
-  | element_name { $1 }
-  | dotclass { $1 }
-  | hash { $1 } 
-*)

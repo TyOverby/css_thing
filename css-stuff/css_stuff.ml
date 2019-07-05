@@ -69,6 +69,19 @@ let test s =
 ;;
 
 let%expect_test _ =
+    test "a {} b {}";
+  [%expect "
+      (identifiers ())
+      a {
+
+      }
+
+      b {
+
+      }"]
+;;
+
+let%expect_test _ =
   test "a {}";
   [%expect "\n      (identifiers ())\n      a {\n\n      }"]
 ;;
